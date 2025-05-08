@@ -3,8 +3,9 @@ import { html, render } from 'lit';
 
 const rootElement = document.getElementById('navigation')
 
+const userLogged = "/login"; //mock 
 
-const navigation = (ctx) => html`
+const navigation = (uu, ctx) => html`
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
 
             <label for="menu-toggle" class="cursor-pointer md:hidden block">
@@ -34,8 +35,8 @@ const navigation = (ctx) => html`
             </div>
 
             <div class="order-2 md:order-3 flex items-center" id="nav-content">
-
-                <a class="inline-block no-underline hover:text-black" href="/login">
+            
+                <a class="inline-block no-underline hover:text-black"  href="${uu}">
                     <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <circle fill="none" cx="12" cy="7" r="3" />
                         <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
@@ -59,8 +60,10 @@ const navigation = (ctx) => html`
 
 export default function renderNav(ctx, next){
     // console.log(ctx)
+    const uu = userLogged //mocked!!! TODO!!!
+    
 
-    render(navigation(), rootElement)
+    render(navigation(userLogged), rootElement)
 
     next()
        
