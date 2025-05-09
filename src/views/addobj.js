@@ -1,6 +1,6 @@
 import { html, render } from "lit";
 
-const rootElement = document.getElementById("products");
+const rootElement = document.getElementById("appRoot");
 
 const template = (ctx) =>
         html` 
@@ -70,8 +70,6 @@ const template = (ctx) =>
                 </button>
             </div>
         </form>
-
-
 
 `
 function submitHandler(event){

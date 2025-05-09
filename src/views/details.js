@@ -28,7 +28,8 @@ const gallery = (car, ctx) =>  html`
             </div>
             <p class="pt-1 text-gray-900">£ ${car.power}</p>
             <p class="pt-1 text-gray-900">${car.exlusivity}</p>
-        </a>
+        </a> 
+            
         </div>
         </div>
 
@@ -45,6 +46,5 @@ export default function detailsView(ctx){
     }
 
         render(gallery(car, ctx), rootElement)
-    
-
+     
 };
