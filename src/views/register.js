@@ -1,12 +1,14 @@
 import { html, render } from 'lit';
 
-const rootElement = document.getElementById("auth");
+const rootElement = document.getElementById("appRoot");
 
 const template= (ctx) => html`<div class="contain py-16">
   <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
     <h2 class="text-2xl uppercase font-medium mb-1">Register</h2>
     <p class="text-gray-600 mb-6 text-sm">Welcome! </p>
-    <form autocomplete="off">
+    <form @submit=${(e) => {registerSubmit(e)}} 
+    action="javascript:void(0);"
+    autocomplete="off">
       <p class="text-red-500"></p>
       <div class="space-y-2">
         <div><label for="email" class="text-gray-600 mb-2 block"></label>Email address<input type="email" name="email" id="email" class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400" placeholder="youremail.@domain.com">
@@ -15,7 +17,7 @@ const template= (ctx) => html`<div class="contain py-16">
       <div class="space-y-2">
         <div><label for="password" class="text-gray-600 mb-2 block"></label>Password<div class="relative"><input type="password" name="password" id="password" class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400" placeholder="***********">
             <div
-              class="cursor-pointer absolute inset-y-0 right-0 flex items-center px-8 text-gray-600 border-l border-gray-300" @click=${e => run(e)}>
+              class="cursor-pointer absolute inset-y-0 right-0 flex items-center px-8 text-gray-600 border-l border-gray-300" >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -28,7 +30,7 @@ const template= (ctx) => html`<div class="contain py-16">
         </div>
       </div>
       <div class="space-y-2">
-        <div><label for="repass" class="text-gray-600 mb-2 block"></label>Confirm password<div class="relative"><input type="repass" name="repass" id="repass" class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400" placeholder="***********">
+        <div><label for="repass" class="text-gray-600 mb-2 block"></label>Confirm password<div class="relative"><input type="password" name="repass" id="repass" class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400" placeholder="***********">
             <div
               class="cursor-pointer absolute inset-y-0 right-0 flex items-center px-8 text-gray-600 border-l border-gray-300">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -53,17 +55,18 @@ const template= (ctx) => html`<div class="contain py-16">
   </div>
 </div>`
 
+function registerSubmit(event){
+  const form = event.target
+  const formData = new FormData(form);
+  const {email, password, repass} = Object.fromEntries(formData)
+  console.log(email, password, repass)
 
-function run(e){
-
-    console.log(e)
-
+  rootElement.innerHTML = ''
 }
 
 export default function register(ctx){
     // console.log(ctx)
     
     render(template(ctx), rootElement);
-
 
 };

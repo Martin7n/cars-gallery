@@ -1,7 +1,7 @@
 import { html, render } from 'lit';
 
 
-const rootElement = document.getElementById("products");
+const rootElement = document.getElementById("appRoot");
 const home = (ctx) =>  
     html`
        <section class="w-full mx-auto bg-nordic-gray-light flex pt-12 md:pt-0 md:items-center bg-cover bg-right" style="max-width:1600px; height: 32rem; background-image: url('https://images.unsplash.com/photo-1422190441165-ec2956dc9ecc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1600&q=80');">

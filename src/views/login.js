@@ -1,12 +1,14 @@
 import { html, render } from 'lit';
 
-const rootElement = document.getElementById("auth");
+const rootElement = document.getElementById("appRoot");
 
 const loginTemplate = (ctx) => html`<div class="contain py-16">
   <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
     <h2 class="text-2xl uppercase font-medium mb-1">Login</h2>
     <p class="text-gray-600 mb-6 text-sm">Welcome! So good to have you back!</p>
-    <form autocomplete="off">
+    <form @submit=${(e) => {loginSubmit(e)}} 
+    action="javascript:void(0);"
+    autocomplete="off">
       <p class="text-red-500"></p>
       <div class="space-y-2">
         <div><label for="email" class="text-gray-600 mb-2 block"></label>Email address<input type="email" name="email" id="email" class="block w-full border border-gray-300 px-4 py-3 text-gray-600 text-sm rounded focus:ring-0 focus:border-teal-500 placeholder-gray-400" placeholder="youremail.@domain.com">
@@ -39,9 +41,20 @@ const loginTemplate = (ctx) => html`<div class="contain py-16">
 </div>`
 
 
+function loginSubmit(event){
+  const form = event.target
+  const formData = new FormData(form);
+  const {email, password} = Object.fromEntries(formData)
+  console.log(email, password)
+
+
+  rootElement.innerHTML = ''
+  
+}
+
+
 export default function loginRender(ctx){
-    console.log('AAAAAAAAAA')
-    // console.log(ctx)
+    console.log(ctx)
     
     render(loginTemplate(ctx), rootElement);
 
