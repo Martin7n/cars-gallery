@@ -39,5 +39,6 @@ yarn-error.log
 Thumbs.db
 
 
-build/
-scrap/
+/build
+/scrap
+.env

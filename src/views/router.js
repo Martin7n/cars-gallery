@@ -10,6 +10,7 @@ import addObj from './addobj.js';
 
 
 
+
 export const setupRoutes = () => {
     page(renderNav);
     page('/', homeRender);
