@@ -1,9 +1,12 @@
 # cars-gallery
 [Simple SPA website](https://asphalt-gallery.web.app/)
 
-- [-] Vanilla JS
-- [-] Vite
-- [-] page.js
-- [-] tailwind
-- [-] lit-html
-- [-] firebase deployment
+- [x] Vanilla JS
+- [x] Vite
+- [x] Page.js
+- [x] Tailwind
+- [x] Lit-html
+- [x] Firebase deployment
+- [ ] Auth and API
+- [ ] Firebase DB
+- [ ] Additional features
