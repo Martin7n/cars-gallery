@@ -1,25 +1,25 @@
 import page from 'page';
-import homeRender from './home.js';
-import renderNav from './navigation.js';
-import galleryRender from './gallery.js'
-import loginRender from './login.js'
-import register from './register.js'
+import homeView from './homeView.js';
+import layoutView from './layoutView.js';
+import galleryView from './galleryView.js'
+import registerView from './registerView.js'
 import logout from './logout.js';
-import detailsView from './details.js'
-import addObj from './addobj.js';
-
-
+import detailsView from './detailsView.js'
+import addObjView from './addobjView.js';
+import { authMiddleWare } from '../middlewares/authmiddleware.js';
+import loginView from './loginView.js';
 
 
 export const setupRoutes = () => {
-    page(renderNav);
-    page('/', homeRender);
-    page('/gallery', galleryRender);
+    page(authMiddleWare);
+    page(layoutView);
+    page('/', homeView);
+    page('/gallery', galleryView);
     page('/details/:id', detailsView)
-    page('/login', loginRender);
-    page('/register', register);
+    page('/login', loginView);
+    page('/register', registerView);
     page('/logout', logout);
-    page('/add-new', addObj);
+    page('/add-new', addObjView);
 
   
     page();

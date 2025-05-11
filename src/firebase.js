@@ -1,4 +1,13 @@
 import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword, 
+    createUserWithEmailAndPassword, setPersistence, 
+    browserLocalPersistence, 
+    onAuthStateChanged,
+    signOut } from "firebase/auth";
+// import { getDatabase } from 'firebase/database';
+import page from "page";
+
+
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -11,4 +20,18 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export { app };
+
+export const auth = getAuth(app);
+// export const database = getDatabase(app);
+
+setPersistence(auth, browserLocalPersistence)
+  .then(() => {
+    console.log('Auth persistence set to local');
+    page.redirect(location.pathname);
+  })
+  .catch((error) => {
+    console.error('Failed to set persistence:', error);
+  });
+
+
+export default  app;

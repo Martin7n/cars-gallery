@@ -1,9 +1,10 @@
 import { html, render } from 'lit';
+import { loggedUser  } from '../api/auth.js'
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from '../firebase.js';
 
 
-const rootElement = document.getElementById("appRoot");
-const home = (ctx) =>  
-    html`
+const template = () =>  html`
        <section class="w-full mx-auto bg-nordic-gray-light flex pt-12 md:pt-0 md:items-center bg-cover bg-right" style="max-width:1600px; height: 32rem; background-image: url('https://images.unsplash.com/photo-1529186405194-c57220dec7c0?q=80&w=1481&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dauto=format&fit=crop&w=1200&q=180');">
         
     <div class="container mx-auto">
@@ -33,8 +34,13 @@ const home = (ctx) =>
     `;
   
   
-  export default function homeRender(ctx){
+export default function (ctx){
 
-    render(home(), rootElement)
-}
-  
+  // render(template,rootElement)
+
+
+     ctx.render(template());
+
+    // render(home(), rootElement);
+    // loggedUser();
+};

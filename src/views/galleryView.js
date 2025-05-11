@@ -1,7 +1,7 @@
 import { html, render } from 'lit';
 
 const rootElement = document.getElementById("appRoot");
-const gallery = (data, ctx) =>  
+const template = (data) =>  
     html`
   <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12" id="products"> 
             <nav id="store" class="w-full z-30 top-0 px-6 py-1">
@@ -57,7 +57,7 @@ const gallery = (data, ctx) =>
     `;
 
 
-  export default function galleryRender(ctx){
+  export default function (ctx){
 
     const data =  Object.values({
         2:{
@@ -81,7 +81,7 @@ const gallery = (data, ctx) =>
     })
     //mockup obj before the api
 
-   
-    render(gallery(data, ctx), rootElement)
+    ctx.render(template(data))
+    // render(gallery(data, ctx), rootElement)
 
 };

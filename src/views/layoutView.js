@@ -1,14 +1,17 @@
 
 import { html, render } from 'lit';
+import { auth, getCurrentUser } from '../api/auth.js';
 
-const rootElement = document.getElementById('navigation')
-const footer = document.getElementById('footer')
+const rootElement = document.getElementById('appRoot')
 
-const userLogged = "/login"; //mock 
 
-const navigation = (uu, ctx) => html`
+const userLogged = "/loggedNonlogedUser"
+
+const navigation = (body, ctx) => html`
+
+             ${ctx.authenticated}
+     <nav id="navigation" class="w-full z-30 top-0 py-1">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
-
             <label for="menu-toggle" class="cursor-pointer md:hidden block">
                 <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                     <title> AAAAAAAAAAAAAAAAAAAAAAAAAAAA</title>
@@ -35,7 +38,7 @@ const navigation = (uu, ctx) => html`
 
             <div class="order-2 md:order-3 flex items-center" id="nav-content">
             
-                <a class="inline-block no-underline hover:text-black"  href="${uu}">
+                <a class="inline-block no-underline hover:text-black"  href="/login">
                     <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <circle fill="none" cx="12" cy="7" r="3" />
                         <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
@@ -52,11 +55,11 @@ const navigation = (uu, ctx) => html`
 
             </div>
         </div>
- 
-`;
+         </nav>  
 
-const footerView = html`
-                <footer class="container mx-auto bg-white py-8 border-t border-gray-400" id="about">
+        ${body}
+
+        <footer class="container mx-auto bg-white py-8 border-t border-gray-400" id="about">
                     <div class="container flex px-3 py-8 ">
                     <div class="w-full mx-auto flex flex-wrap">
                         <div class="flex w-full lg:w-1/2 ">
@@ -98,16 +101,25 @@ const footerView = html`
                         </div>
                     </div>
                     </div>
-                </footer>`
+                </footer>
+ `
+
+
+                
 
 
 
-export default function renderNav(ctx, next){
-    // console.log(ctx)
-    const uu = userLogged //mocked!!! TODO!!!
+export default async function (ctx, next){
 
-    render(navigation(userLogged), rootElement)
-    render(footerView, footer)
+
+     console.log(ctx.isAuthenticated);
+
+    ctx.render = (templateResult) => {
+            render(navigation(templateResult, ctx), rootElement)
+        };
+
+        // const usr = await auth.currentUser;
+        // console.log(usr.email)
 
     next()
        

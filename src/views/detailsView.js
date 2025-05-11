@@ -1,7 +1,7 @@
 import { html, render } from 'lit';
 
 const rootElement = document.getElementById("appRoot");
-const gallery = (car, ctx) =>  html`
+const template = (car) =>  html`
   <div class="container mx-auto flex items-center flex-wrap pt-4 pb-12" id="products"> 
 
             <div class="w-full md:w-4/5 xl:w-1/2 p-1 flex flex-col items-center mx-auto">
@@ -35,7 +35,7 @@ const gallery = (car, ctx) =>  html`
 
                 `;
 
-export default function detailsView(ctx){
+export default function (ctx){
 
     console.log(ctx.params.id)
 
@@ -44,7 +44,7 @@ export default function detailsView(ctx){
         power: "200",
         exlusivity: "66"
     }
-
-        render(gallery(car, ctx), rootElement)
+    
+    ctx.render(template(car));
      
 };

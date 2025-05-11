@@ -1,8 +1,13 @@
 import { html, render } from 'lit';
+import { login } from '../api/auth.js'
+import page from 'page';
+import {signInWithEmailAndPassword} from 'firebase/auth'
+import { auth } from '../firebase.js';
+
 
 const rootElement = document.getElementById("appRoot");
 
-const loginTemplate = (ctx) => html`<div class="contain py-16">
+const template = (loginSubmit) => html`<div class="contain py-16">
   <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
     <h2 class="text-2xl uppercase font-medium mb-1">Login</h2>
     <p class="text-gray-600 mb-6 text-sm">Welcome! So good to have you back!</p>
@@ -41,22 +46,37 @@ const loginTemplate = (ctx) => html`<div class="contain py-16">
 </div>`
 
 
-function loginSubmit(event){
+async function loginSubmit(event){
   const form = event.target
   const formData = new FormData(form);
   const {email, password} = Object.fromEntries(formData)
-  console.log(email, password)
 
+  try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
-  rootElement.innerHTML = ''
+        console.log(userCredential);
+
+        page.redirect('/');
+    } catch(err) {
+        console.log(err.message);
+    }
+
+    console.log('Submit');
+
+  // await login(email, password)
+  //  page.redirect('/');
+  // console.log(email, password)
+  
+
+  // rootElement.innerHTML = ''
   
 }
 
 
-export default function loginRender(ctx){
+export default function (ctx){
     console.log(ctx)
     
-    render(loginTemplate(ctx), rootElement);
+    ctx.render(template(loginSubmit));
 
 
 };

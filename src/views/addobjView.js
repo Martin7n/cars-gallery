@@ -2,7 +2,7 @@ import { html, render } from "lit";
 
 const rootElement = document.getElementById("appRoot");
 
-const template = (ctx) =>
+const template = (submitHandler) =>
         html` 
         <form @submit=${(e) => submitHandler(e)}
             action="javascript:void(0);" method="" class="w-full md:w-4/5 xl:w-1/2 p-1 flex flex-col items-center mx-auto">
@@ -88,10 +88,11 @@ function loadPreview(event) {
     preview.onload = () => URL.revokeObjectURL(preview.src);
   }
 
-export default function addObj(ctx){
+export default function (ctx){
 
+    ctx.render(template(submitHandler));
 
-    render(template(ctx), rootElement)
+    // render(template(ctx), rootElement)
     
 
 }
