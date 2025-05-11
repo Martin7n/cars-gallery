@@ -1,4 +1,6 @@
 import { html, render } from 'lit';
+import cars from '../api/cars';
+
 
 const rootElement = document.getElementById("appRoot");
 const template = (car) =>  html`
@@ -8,7 +10,7 @@ const template = (car) =>  html`
                 <a href="#" class="w-full flex flex-col items-center">
                 <img
                 class="w-[50vw]  h-auto object-cover hover:grow hover:shadow-lg"
-                src="https://images.unsplash.com/photo-1555982105-d25af4182e4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&h=400&q=80"
+                src=${car.imageUrl}
                 alt="Car image"
                 />
                 <div class="pt-3 flex items-center justify-between w-full px-4">
@@ -35,16 +37,17 @@ const template = (car) =>  html`
 
                 `;
 
-export default function (ctx){
+export default async function (ctx){
 
     console.log(ctx.params.id)
 
-    const car = {
-        name: "A1",
-        power: "200",
-        exlusivity: "66"
-    }
+    // const car = {
+    //     name: "A1",
+    //     power: "200",
+    //     exlusivity: "66"
+    // }
     
+    const car = await cars.getOne(ctx.params.id)
     ctx.render(template(car));
      
 };

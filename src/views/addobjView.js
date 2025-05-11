@@ -1,4 +1,6 @@
 import { html, render } from "lit";
+import cars from "../api/cars";
+import page from "page";
 
 const rootElement = document.getElementById("appRoot");
 
@@ -49,6 +51,14 @@ const template = (submitHandler) =>
 
                 <input
                 type="text"
+                name="imageUrl"
+                placeholder="image url"
+                class="pt-1 w-full text-center text-gray-900 bg-transparent border-b border-gray-300 focus:outline-none focus:border-black"
+                required
+                />
+
+                <input
+                type="text"
                 name="power"
                 placeholder="Power (e.g. 300hp)"
                 class="pt-1 w-full text-center text-gray-900 bg-transparent border-b border-gray-300 focus:outline-none focus:border-black"
@@ -72,13 +82,24 @@ const template = (submitHandler) =>
         </form>
 
 `
-function submitHandler(event){
+async function submitHandler(event){
 
     const form = event.target;
     const formData = new FormData(form);
-    const {image, name, power, exclusivity} = Object.fromEntries(formData)
     const imageFile = formData.get('image');
-    console.log(image, name, power, exclusivity)
+        if (imageFile && imageFile.size > 0) {
+        const url = await uploadImage(imageFile);
+        console.log('Uploaded Image URL:', url);
+    }
+    formData.delete("image");
+
+    const carData = Object.fromEntries(formData);
+    formData.delete("image");
+
+    cars.addCar(carData)
+    page.redirect('/gallery')
+
+    // console.log(image, name, power, exclusivity)
 
 
 }
