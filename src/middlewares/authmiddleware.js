@@ -25,7 +25,7 @@ export function authMiddleWare(ctx, next) {
         ctx.user = user;
         ctx.authenticated = !!user;
         console.log("Middleware user:", user);
-        next();  // Call next only after user state is resolved
+        next();  
     });
-    next()
+    
 }

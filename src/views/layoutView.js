@@ -1,7 +1,6 @@
 
 import { html, render } from 'lit';
-// import { auth, getCurrentUser } from '../api/auth.js';
- import auth from '../firebase.js'
+
 
 const rootElement = document.getElementById('appRoot')
 
@@ -10,7 +9,7 @@ const userLogged = "/loggedNonlogedUser"
 
 const navigation = (body, ctx) => html`
 
-        <div>${ctx.authenticated} </div>
+        <div>${ctx.authenticated ? `Hello ${ctx.user.email} user.` : `You   may login or register`} </div>
             
      <nav id="navigation" class="w-full z-30 top-0 py-1">
         <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 px-6 py-3">
@@ -39,7 +38,7 @@ const navigation = (body, ctx) => html`
             </div>
 
             <div class="order-2 md:order-3 flex items-center" id="nav-content">
-                <a class="inline-block no-underline hover:text-black"  href="${ctx.isAuthenticated ? '/login' : '/logout' }">
+                <a class="inline-block no-underline hover:text-black"  href="${ctx.authenticated ? '/logout' : '/login' }">
                     <svg class="fill-current hover:text-black" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         <circle fill="none" cx="12" cy="7" r="3" />
                         <path d="M12 2C9.243 2 7 4.243 7 7s2.243 5 5 5 5-2.243 5-5S14.757 2 12 2zM12 10c-1.654 0-3-1.346-3-3s1.346-3 3-3 3 1.346 3 3S13.654 10 12 10zM21 21v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h2v-1c0-2.757 2.243-5 5-5h4c2.757 0 5 2.243 5 5v1H21z" />
