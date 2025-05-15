@@ -1,6 +1,6 @@
 import page from 'page';
 import { signOut } from 'firebase/auth';
-
+import { auth } from '../firebase.js';
 
 
 export default async function (ctx) {
