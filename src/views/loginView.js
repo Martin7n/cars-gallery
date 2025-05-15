@@ -1,5 +1,4 @@
 import { html, render } from 'lit';
-import { login } from '../api/auth.js'
 import page from 'page';
 import {signInWithEmailAndPassword} from 'firebase/auth'
 import { auth } from '../firebase.js';
@@ -46,6 +45,15 @@ const template = (loginSubmit) => html`<div class="contain py-16">
 </div>`
 
 
+
+export default function (ctx){
+    console.log(ctx)
+
+    ctx.render(template(loginSubmit));
+
+};
+
+  
 async function loginSubmit(event){
   const form = event.target
   const formData = new FormData(form);
@@ -55,10 +63,12 @@ async function loginSubmit(event){
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
         console.log(userCredential);
+        console.log("login successful")
 
         page.redirect('/');
     } catch(err) {
         console.log(err.message);
+        alert(err.message)
     }
 
     console.log('Submit');
@@ -73,10 +83,3 @@ async function loginSubmit(event){
 }
 
 
-export default function (ctx){
-    console.log(ctx)
-    
-    ctx.render(template(loginSubmit));
-
-
-};

@@ -1,14 +1,9 @@
 import { initializeApp } from "firebase/app";
+import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { getStorage } from "firebase/storage";
 import { getDatabase } from 'firebase/database';
-
-import { getAuth, signInWithEmailAndPassword, 
-    createUserWithEmailAndPassword, setPersistence, 
-    browserLocalPersistence, 
-    onAuthStateChanged,
-    signOut } from "firebase/auth";
-// import { getDatabase } from 'firebase/database';
 import page from "page";
+// import { getDatabase } from 'firebase/database';
 
 
 
@@ -23,19 +18,16 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const database = getDatabase(app);
-
-export const storage = getStorage(app);
-
 export const auth = getAuth(app);
+export const database = getDatabase(app);
+export const storage = getStorage(app);
 
 setPersistence(auth, browserLocalPersistence)
   .then(() => {
     console.log('Auth persistence set to local');
     page.redirect(location.pathname);
-  })
-  .catch((error) => {
-    console.error('Failed to set persistence:', error);
+  }).catch(err => {
+        console.log('Persistance error');
   });
 
 

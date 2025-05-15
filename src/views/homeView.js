@@ -1,7 +1,7 @@
 import { html, render } from 'lit';
-import { loggedUser  } from '../api/auth.js'
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from '../firebase.js';
+// import { loggedUser  } from '../api/auth.js'
+// import { onAuthStateChanged } from 'firebase/auth';
+// import { auth } from '../firebase.js';
 
 
 const template = () =>  html`
@@ -36,11 +36,6 @@ const template = () =>  html`
   
 export default function (ctx){
 
-  // render(template,rootElement)
-
-
      ctx.render(template());
 
-    // render(home(), rootElement);
-    // loggedUser();
 };

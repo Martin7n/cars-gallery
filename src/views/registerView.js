@@ -1,8 +1,11 @@
 import { html, render } from 'lit';
+import { createUserWithEmailAndPassword }  from "firebase/auth";
+import page from 'page';
+
 
 const rootElement = document.getElementById("appRoot");
 
-const template= (ctx) => html`<div class="contain py-16">
+const template= (registerSubmit) => html`<div class="contain py-16">
   <div class="max-w-lg mx-auto shadow px-6 py-7 rounded overflow-hidden">
     <h2 class="text-2xl uppercase font-medium mb-1">Register</h2>
     <p class="text-gray-600 mb-6 text-sm">Welcome! </p>
@@ -55,18 +58,28 @@ const template= (ctx) => html`<div class="contain py-16">
   </div>
 </div>`
 
-function registerSubmit(event){
+
+export default function (ctx){
+    console.log(ctx)
+    
+    ctx.render(template(registerSubmit));
+
+
+};
+
+
+async function registerSubmit(event){
+  event.preventDefault();
   const form = event.target
   const formData = new FormData(form);
   const {email, password, repass} = Object.fromEntries(formData)
-  console.log(email, password, repass)
+  try {
+  await createUserWithEmailAndPassword(auth, email, password);
+  page.redirect("/")
+  
+  } catch(err) {
+    alert(err.message)
+  }
 
-  rootElement.innerHTML = ''
 }
 
-export default function register(ctx){
-    // console.log(ctx)
-    
-    render(template(ctx), rootElement);
-
-};
